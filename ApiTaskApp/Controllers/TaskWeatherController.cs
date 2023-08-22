@@ -14,8 +14,8 @@ namespace ApiTaskApp.Controllers
     public class TaskWeatherController : ControllerBase
     {
         // GET: api/WeatherMax
-        [HttpGet("{city}")]
-        public async Task<IActionResult> GetWeather(string city)
+        [HttpGet("{lat},{lon}")]
+        public async Task<IActionResult> GetWeather(double lat, double lon)
         {
             //ApiHelper apiHelper1 = new ApiHelper();
             ApiHelper apiHelper2 = new ApiHelper();
@@ -33,7 +33,7 @@ namespace ApiTaskApp.Controllers
 
             //var lat = cityData.Lat;
             //var lon = cityData.Lon;
-            var openWeatherMapApi = $"https://api.openweathermap.org/data/3.0/onecall?lat={51.5073219}&lon={-0.1276474}&units=metric&exclude=minutely,hourly,daily,alerts&appid=12e9c9b3164d7a28de7274f057a0a701";
+            var openWeatherMapApi = $"https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&units=metric&exclude=minutely,hourly,daily,alerts&appid=12e9c9b3164d7a28de7274f057a0a701";
 
             HttpResponseMessage responseFinal = await apiHelper2.ApiClient.GetAsync(openWeatherMapApi);
             if (!responseFinal.IsSuccessStatusCode)
